@@ -64,18 +64,26 @@ class Map extends React.Component {
         })
 
     }
+    showInfoWindow = (index) => {
+        const {markers} = this.state
+        markers[index] && markers[index].iw.open(this.map, markers[index])
+    }
+
+    hideAllMarkers = () => {
+        const {markers} = this.state
+
+        markers.forEach(marker => marker.iw.close())
+    }
 
     componentWillReceiveProps(nextProps) {
         const {activeProperty} = nextProps
 
-        const {latitude, longitude, index} = activeProperty;
-        const {markers} =this.state
+        const {index} = activeProperty;
         // hide all other info boxes
-        markers.forEach(marker => marker.iw.close())
+        this.hideAllMarkers()
 
         // show info window for new active property
-
-        markers[index] && markers[index].iw.open(this.map, markers[index])
+        this.showInfoWindow(index)
 
     }
     render() {
