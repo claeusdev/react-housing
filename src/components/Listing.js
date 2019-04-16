@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 
-export const Listing = ({property, activeProperty}) => {
+export const Listing = ({property, activeProperty, setActiveProperty}) => {
     console.log(property)
     const {
         index,
@@ -16,7 +16,7 @@ export const Listing = ({property, activeProperty}) => {
         picture} = property
         
     return (
-        <div id={`card-${index}`} className={`media ${property === activeProperty ? "is-active ": ""}`}>
+        <div id={`card-${index}`} className={`media ${property === activeProperty ? "is-active ": ""}`} onClick={() => setActiveProperty(property, false)}>
         <img className="mr-3" src={picture} alt="Generic placeholder" />
         <div className="media-body">
             <h5 className="mt-0">{price}</h5>
@@ -29,7 +29,8 @@ export const Listing = ({property, activeProperty}) => {
 
 Listing.propTypes = {
     property: PropTypes.object.isRequired,
-    activeProperty: PropTypes.object.isRequired
+    activeProperty: PropTypes.object.isRequired,
+    setActiveProperty: PropTypes.func.isRequired
 }
 
 

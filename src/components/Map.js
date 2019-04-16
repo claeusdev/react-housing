@@ -52,7 +52,7 @@ class Map extends React.Component {
             // Set active property to state on click
             this.marker.addListener("click", () => {
                 markers.forEach(marker => marker.iw.close())
-                setActiveProperty(property)
+                setActiveProperty(property, true)
             })
 
             // push marker to markers array
@@ -62,6 +62,20 @@ class Map extends React.Component {
             markers[0].iw.open(this.map, this.marker)
 
         })
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {activeProperty} = nextProps
+
+        const {latitude, longitude, index} = activeProperty;
+        const {markers} =this.state
+        // hide all other info boxes
+        markers.forEach(marker => marker.iw.close())
+
+        // show info window for new active property
+
+        markers[index] && markers[index].iw.open(this.map, markers[index])
 
     }
     render() {

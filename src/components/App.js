@@ -10,20 +10,21 @@ class App extends Component {
     activeProperty: data.properties[0]
   }
 
-  setActiveProperty = (property) => {
+  setActiveProperty = (property, scroll) => {
     const {index} = property;
     this.setState({
       activeProperty: property
     })
     // scroll to active property
-    const target = `#card-${index}`
-    jump(target, {
-      duration: 800,
-      // eslint-disable-next-line no-undef
-      easing: jump.easeInOutQuad,
-      a11y: true
-    })
 
+      const target = `#card-${index}`
+      jump(target, {
+        duration: 100,
+        // eslint-disable-next-line no-undef
+        easing: jump.easeInOutQuad,
+        a11y: true
+      })
+    
   }
 
   render() {
@@ -35,12 +36,13 @@ class App extends Component {
         </div>
         <div className="col-md-5" style={{overflowY: "auto", height: "100vh"}}>
           {properties.map(property => {
-           return <Listing key={property._id} property={property} activeProperty={activeProperty}/>
+           return <Listing key={property._id} property={property} activeProperty={activeProperty} setActiveProperty={this.setActiveProperty} />
           })}
         </div>
       </div>
     );
   }
 }
+
 
 export default App;
