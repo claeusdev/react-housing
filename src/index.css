@@ -12,3 +12,7 @@
     height: 100%;
     /* background-color: rgba(173, 216, 230, 0.4); */
 }
+
+.is-active {
+    border: 2px solid red;
+}

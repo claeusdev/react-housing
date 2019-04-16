@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types'
 
@@ -9,7 +10,7 @@ class Map extends React.Component {
          };
     }
     componentDidMount() {
-        const {activeProperty} = this.props
+        const {activeProperty, properties} = this.props
         const {longitude, latitude} = activeProperty
             // eslint-disable-next-line no-undef
            this.map = new google.maps.Map(this.refs.map, {
@@ -17,11 +18,34 @@ class Map extends React.Component {
                     lat: latitude,
                     lng: longitude
                 },
-                mapTpyeControls: false,
-                zoom: 10
+                mapTypeControl: false,
+                zoom: 15
             });
+        this.addMarkers(properties)
         
-        
+    }
+    addMarkers = (properties) => {
+        const {setActiveProperty} = this.props
+         properties.map(property => {
+            const {latitude, longitude} = property
+            // eslint-disable-next-line no-undef
+            this.marker = new google.maps.Marker({
+                position: {
+                    lat: latitude,
+                    lng: longitude
+                },
+                map: this.map,
+                
+                icon: {
+                    url: "https://img.icons8.com/color/48/000000/marker.png",
+                },
+            })
+
+            this.marker.addListener("click", () => {
+                setActiveProperty(property)
+            })
+        })
+
     }
     render() {
         return (
@@ -32,7 +56,8 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
-    properties: PropTypes.array.isRequired
+    properties: PropTypes.array.isRequired,
+    setActiveProperty: PropTypes.func.isRequired
 }
 
 export default Map;
