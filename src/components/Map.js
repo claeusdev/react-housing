@@ -25,9 +25,10 @@ class Map extends React.Component {
         
     }
     addMarkers = (properties) => {
+        const {markers} = this.state
         const {setActiveProperty} = this.props
          properties.map(property => {
-            const {latitude, longitude} = property
+            const {latitude, longitude, address} = property
             // eslint-disable-next-line no-undef
             this.marker = new google.maps.Marker({
                 position: {
@@ -41,9 +42,25 @@ class Map extends React.Component {
                 },
             })
 
+            // creating info window for each marker
+            const iw = new google.maps.InfoWindow({
+                content: `<h1>${address}</h1>`
+            })
+
+            this.marker.iw = iw;
+
+            // Set active property to state on click
             this.marker.addListener("click", () => {
+                markers.forEach(marker => marker.iw.close())
                 setActiveProperty(property)
             })
+
+            // push marker to markers array
+            markers.push(this.marker)
+
+            // show active property info window
+            markers[0].iw.open(this.map, this.marker)
+
         })
 
     }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import data from '../Data'
 import { Listing } from './Listing';
 import Map from './Map';
+import jump from 'jump.js'
+
 class App extends Component {
   state = {
     properties: data.properties,
@@ -9,9 +11,19 @@ class App extends Component {
   }
 
   setActiveProperty = (property) => {
+    const {index} = property;
     this.setState({
       activeProperty: property
     })
+    // scroll to active property
+    const target = `#card-${index}`
+    jump(target, {
+      duration: 800,
+      // eslint-disable-next-line no-undef
+      easing: jump.easeInOutQuad,
+      a11y: true
+    })
+
   }
 
   render() {
