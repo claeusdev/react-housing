@@ -26,7 +26,8 @@ class Map extends React.Component {
     }
     addMarkers = (properties) => {
         const {markers} = this.state
-        const {setActiveProperty} = this.props
+        const {setActiveProperty, activeProperty} = this.props
+        const {index} = activeProperty
          properties.map(property => {
             const {latitude, longitude, address} = property
             // eslint-disable-next-line no-undef
@@ -51,7 +52,7 @@ class Map extends React.Component {
 
             // Set active property to state on click
             this.marker.addListener("click", () => {
-                markers.forEach(marker => marker.iw.close())
+                this.hideAllMarkers()
                 setActiveProperty(property, true)
             })
 
@@ -59,7 +60,7 @@ class Map extends React.Component {
             markers.push(this.marker)
 
             // show active property info window
-            markers[0].iw.open(this.map, this.marker)
+            this.showInfoWindow(index)
 
         })
 
