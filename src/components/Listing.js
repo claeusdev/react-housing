@@ -2,10 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 
-export const Listing = ({address, price, latitude, longitude, bathrooms, bedrooms, city, picture }) => {
-
+export const Listing = ({property, activeProperty}) => {
+    console.log(property)
+    const {
+        address,
+        price,
+        latitude,
+        longitude,
+        bathrooms,
+        bedrooms,
+        city,
+        picture} = property
+        
     return (
-        <div className="media">
+        <div className={`media ${property === activeProperty ? "is-active ": ""}`}>
         <img className="mr-3" src={picture} alt="Generic placeholder" />
         <div className="media-body">
             <h5 className="mt-0">{price}</h5>
@@ -16,8 +26,9 @@ export const Listing = ({address, price, latitude, longitude, bathrooms, bedroom
     )
 }
 
-Listing.prototype = {
-    property: PropTypes.object.isRequired
+Listing.propTypes = {
+    property: PropTypes.object.isRequired,
+    activeProperty: PropTypes.object.isRequired
 }
 
 
