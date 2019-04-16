@@ -3,6 +3,7 @@ import data from '../Data'
 import { Listing } from './Listing';
 import Map from './Map';
 import jump from 'jump.js'
+import Header from './Header';
 
 class App extends Component {
   state = {
@@ -34,7 +35,8 @@ class App extends Component {
         <div className="col-md-7" >
           <Map properties={properties} activeProperty={activeProperty} setActiveProperty={this.setActiveProperty}/>
         </div>
-        <div className="col-md-5" style={{overflowY: "auto", height: "100vh"}}>
+        <div className="col-md-5 bg-light listings" style={{overflowY: "auto", height: "100vh"}}>
+          <Header />
           {properties.map(property => {
            return <Listing key={property._id} property={property} activeProperty={activeProperty} setActiveProperty={this.setActiveProperty} />
           })}

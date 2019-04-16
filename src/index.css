@@ -14,5 +14,40 @@
 }
 
 .is-active {
-    border: 2px solid red;
+    border: 2px solid #F2F3F2;
 }
+
+header {
+    height: 120px;
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 10px;
+}
+
+.bg-light {
+    background-color: #F2F3F2;
+}
+
+.listings {
+    padding: 18px;
+}
+.listing {
+    background-color: white;
+    margin: 0 0 2% 0;
+    box-shadow: 0px 3px 8px -4px rgba(0, 0, 0, 0.15);
+    display: block;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.listing:hover 
+    {
+        box-shadow: 0 22px 43px rgba(0, 0, 0, 0.15);
+        -webkit-box-shadow: 0 22px 43px rgba(0, 0, 0, 0.15);
+        -webkit-transform: translateY(-4px);
+        transform: translateY(-4px);
+        -moz-transform: none
+    }

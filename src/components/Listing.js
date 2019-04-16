@@ -16,7 +16,7 @@ export const Listing = ({property, activeProperty, setActiveProperty}) => {
         picture} = property
         
     return (
-        <div id={`card-${index}`} className={`media ${property === activeProperty ? "is-active ": ""}`} onClick={() => setActiveProperty(property, false)}>
+        <div id={`card-${index}`} className={`media listing align-items-center ${property === activeProperty ? "is-active ": ""}`} onClick={() => setActiveProperty(property, false)}>
         <img className="mr-3" src={picture} alt="Generic placeholder" />
         <div className="media-body">
             <h5 className="mt-0">{price}</h5>
